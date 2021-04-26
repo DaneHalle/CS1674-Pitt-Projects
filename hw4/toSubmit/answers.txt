@@ -1,0 +1,37 @@
+For which of the three representations is the within-between ratio smallest?
+	BOW with a k mean
+Does the answer to this question depend on the value of k that you use?
+	Yes, a higher k generally means a lower within-between ratio (except for k=2)
+Does it depend on the number of keypoints you extract? (Try 500, 1000, 2000, 3000.)
+	Generally no it does not change in any meaningful matter with larger number of key points. (Do note that all of the options caused the within-between ratio for BOW with K to be NaN)
+Which of the three types of descriptors that you used is the best one? How can you tell?
+	The lowest ratio goes to BOW with k=5 but due to how much the ratio varies for the other k's, it isn't the best option. This makes me feel that texture mean is the best option due to it having the all around lowest ratio. 
+Is this what you expected? Why or why not?
+	I would have thought that BOW would have been the better option. More specifically, I would have thought that a higher k would have resulted in a better descriptor, causing BOW with k being the better option. However, I realize that due to the different options of this, it makes it a worse option as not all options for k would not be as good as the single best option which might be better than texture mean. 
+
+Below is the output when my extract_keypoints is set to maxk where k is 100
+Ratio for BOW k=2: 1.202189
+    0.3554    0.1040    0.0335
+
+Ratio for BOW k=5: 0.554639
+    0.3243    0.0771    0.1538
+
+Ratio for BOW k=10: 0.639909
+    0.3354    0.0744    0.1124
+
+Ratio for BOW k=50: 0.771786
+    0.2424    0.0706    0.0872
+
+Ratio for BOW k=100: 0.785365
+    0.2085    0.0650    0.0742
+
+Ratio for BOW k=200: 0.810833
+    0.1862    0.0554    0.0637
+
+Ratio for texture concat: 0.942568
+   1.0e+04 *
+
+    1.3765    1.9379    1.9123
+
+Ratio for texture mean: 0.563118
+    7.0515    1.5788    7.1969

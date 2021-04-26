@@ -1,0 +1,17 @@
+Part I:
+
+	accuracy = 0.1250
+
+	One reason why we might be seeing such a low accuracy compared to the SVM and KNN implemented in hw7 is due to the loss spiking down very early on. As shown in the included image (part_i_1_epoch.png), The loss I experienced started around 14-15 and then shot down to around 2-3. Another reason is that the training layers are "dumb" compared to what we did with SVM and KNN.
+
+Part II:
+	
+	accuracy = 0.6250
+
+	Utilizing an already pretrained network, being ImageNet, and transferring what it has done well to do what you need it to do is a very effective method for getting migher accruacies than making the entire network yourself and training it from scratch. This part showed that even though we are only taking part of the network and transferring it to our need, it still is much more effective and more epochs will only get better (in my test of 20 epochs I got around 80% accuracy).
+
+Part III:
+
+	accuracy = 0.7800
+
+	Much like part 2, this will be more effective than part 1 as it is utilizing ImageNet's model for Transfer Learning. This time, we are using even more of the pre-trained network which resulted in a higher accuracy after one epoch. If we increased the number of epochs, not only would this number increase (around 90% in my test of 20 epochs), it would likely be higher than part 2's accuracy would at the same level of training. 

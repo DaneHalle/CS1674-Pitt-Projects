@@ -1,0 +1,8 @@
+accuracySVM = 0.5525
+accuracyKNN1 = 0.3950
+accuracyKNN2 = 0.4225
+accuracyKNN21 = 0.4500
+accuracySVM_train = 0.6587
+accuracyKNN1_train = 1
+accuracyKNN2_train = 0.6850
+accuracyKNN21_train = 0.5212

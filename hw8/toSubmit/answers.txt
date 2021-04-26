@@ -1,0 +1,20 @@
+w1LossHinge = 3.8142
+
+
+w1LossCross = 1.8020
+
+
+w2LossHinge = 2.6623
+
+The best weights for the Hinge loss function is W2
+
+
+w2LossCross = 1.4055
+
+
+w3LossHinge = 3.2668
+
+
+w3LossCross = 1.5226
+
+The best weights for the Cross-Entropy loss function is W1

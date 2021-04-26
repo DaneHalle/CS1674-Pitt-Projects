@@ -1,0 +1,112 @@
+
+<!-- saved from url=(0046)http://pitt.edu/~sjh95/cs1674_s21/hw9/hw9.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>CS1674: Homework 9 </title>
+<style type="text/css">
+</style>
+</head>
+<body data-new-gr-c-s-check-loaded="14.981.0">
+<h2>CS1674: Homework 9 </h2>
+<b>Due:</b> 4/15/2021, 11:59pm
+<br><br>
+
+This assignment is worth 50 points.
+<br><br><br>
+
+In this assignment, you will train deep networks to perform categorization.
+The assignment has four parts. In the first part, you will train a neural network from scratch.
+In the second and third, you will transfer layers from a pretrained network, then append and train one fully-connected (FC) layer.
+In the last part, you will describe your findings.
+<br><br>
+
+You will use the same dataset as for HW7. However, because we want to make sure we use square images (i.e. 227x227), you will need to create a separate folder with the same eight folders (categories) as those in HW7, but inside each folder, copy only the images with "resized" in the filename, resulting in 1200 images total in the top-level folder <font face="courier new">scenes_lazebnik</font> (you can also download a new copy of the data with just the resized images from Canvas).
+<br><br>
+
+You will also need to install the Matlab Deep Learning (DL) Toolbox add-on. Go to Home --&gt; Add-ons to do that.
+<br><br>
+
+For each problem, write your code in a separate script titled <font face="courier new">part_X.m</font> where X is <font face="courier new">i, ii</font> or <font face="courier new">iii</font>. Also submit a separate file <font face="courier new">answers.txt</font> where you describe and compare the performance of your different networks. Briefly hypothesize why you observe these trends, based on what we have discussed in class.
+<br><br>
+
+You will need to rely on the Matlab documentation to learn how to use the built-in neural network functions. Any existing functions are fair game-- of course, do not look for scripts that accomplish the entirety of what an assignment part asks. However, for this assignment, the goal IS to learn how to use the documentation, hence please do look up functions and examples. Some useful links are below. Please skim through all of them to get a sense of how the DL toolbox works.
+<ol>
+<li><a href="https://www.mathworks.com/help/deeplearning/deep-learning-with-images.html">deep learning with images</a></li>
+<li><a href="https://www.mathworks.com/help/deeplearning/ref/trainnetwork.html">train network</a></li>
+<li><a href="https://www.mathworks.com/help/deeplearning/ref/trainingoptions.html">training options</a></li>
+<li><a href="https://www.mathworks.com/help/deeplearning/examples/transfer-learning-using-alexnet.html">transfer learning</a></li>
+<li><a href="https://www.mathworks.com/help/deeplearning/ref/classify.html">classify</a></li>
+<li><a href="https://www.mathworks.com/help/deeplearning/ref/nnet.cnn.layer.convolution2dlayer.html">convolution layer</a></li>
+<li><a href="https://www.mathworks.com/help/deeplearning/ref/nnet.cnn.layer.maxpooling2dlayer.html">max pooling layer</a></li>
+<li><a href="https://www.mathworks.com/help/deeplearning/ref/nnet.cnn.layer.fullyconnectedlayer.html">fully connected layer</a></li>
+</ol>
+
+Some of the functions you will need to call are <font face="courier new">imageDatastore</font>, <font face="courier new">splitEachLabel</font> (to load and split the dataset; we will not use <font face="courier new">load_split_dataset</font> from before), <font face="courier new">trainingOptions</font>, <font face="courier new">trainNetwork</font>, <font face="courier new">classify</font>. Doing the assignment will be very easy if you skim through the references above.
+<br><br>
+
+Unless otherwise specified, use a learning rate of 0.001, a maximum of 1 epochs, 100 images per class for training, and the rest (50) for testing.
+<br><br>
+
+Training each network should take about 1-5 min depending on your CPU.
+<br><br><br>
+
+<u>Part I</u> (15 pts):
+<br><br>
+In this part, you will train a neural network for the task of classifying the eight scenes from HW7, from scratch.
+<ol>
+<li>You need to specify a folder for the train set and the test set. Refer to the "train network" link for details on how to set up the data.</li>
+<li>Create a network with three groups of layers (denoted A, B, C in the following).
+  First, use an image input layer; this "layer" takes in the images at size 227x227x3.
+  Then, construct the following layer group A: a convolution layer with 50 11x11 layers (same size as the filters in the first layer of AlexNet) with stride 4, followed by RELU and a max pooling layer of size 3x3 and stride 1.
+  Then, layer group B: a convolution layer with 60 5x5 filters, RELU and max pooling of size 3x3 and stride 2.
+  Then, layer group C: a fully-connected layer with size 8 (for 8 classes), followed by a  softmax layer (which computes probabilities) and a classification layer.
+  Check the links above for the corresponding functions and their inputs format.</li>
+<li>You need to specify options for training the network. Use the "training options" link above. Specify the max number of epochs, the learning rate, and set the 'Plots' variable such that it shows training progress.</li>
+<li>For simplicity, we will <b>not</b> use a validation set. Train the network and output performance on the test set after the last iteration. You can use the <font face="courier new">classify</font> function and the <font face="courier new">imdsTest.Labels</font> variable to get the ground-truth labels on the test set.</li>
+<li>In your answers file, hypothesize why you see such high/low performance. Keep in mind what performance was in HW7.</li>
+</ol>
+<br>
+
+<u>Part II</u> (15 pts):
+<br><br>
+In this part, you will transfer layers from an AlexNet network trained on the ImageNet dataset. Refer to the "transfer learning" link. Transfer all layers up to but excluding the FC6 layer (i.e., transfer the layers up to the one just before <font face="courier new">'fc6'</font>). It will be helpful to see what layers you are transfering; try the net.Layers to get a list of the layers in AlexNet. Append a single fully-connected layer (of size 8), followed by softmax and classification. Then train and evaluate performance, and describe your observations.
+<br><br><br>
+
+<u>Part III</u> (10 pts):
+<br><br>
+In this part, you will also transfer layers, but additionally transfer FC6 and FC7, all the way up to (but excluding) FC8 (i.e., transfer the layers up to the one just before <font face="courier new">'fc8'</font>). Now append a single fully-connected layer, as before. Train the network, evaluate performance on the test set, and describe your observations in the answers file.
+<br><br><br>
+
+<u>Part IV</u> (10 pts):
+<br><br>
+In a file <font face="courier new">answers.txt</font>, list all accuracies for each setting described above. Then hypothesize the reasons for the relative performance of each method. For the first part, hypothesize reasons for the network's performance relative to the performance of the SVM classifier we developed in HW7. For later parts, hypothesize reasons for the performance of the network in that part, compared to the network in the previous part. Aim for about 3-5 sentences.
+<br><br><br>
+
+<u>Extra experiments</u> (No pts, just for fun):
+<br><br>
+This part is purely for just playing around with the network training. Don't submit this. It won't be graded. You also can simply ignore this section; I just wanted to use this HW as an opportunity to get some hands on network training experience beyond the above simple cases.
+<br><br>
+You may have noticed that the above training procedures (learning reate of 0.001, max epoch of 1) can probably be improved. In fact, they can be improved by better training procedures and hyperparameters.
+For your own interest, considering changing hyperparameters for your training (can use different hyperparamters for each Part):
+<ul>
+  <li>Max epoch: increase this to train for longer</li>
+  <li>Initial learning rate: Instead of 0.001, conservatively trying smaller learning rates (e.g., 0.0001) often helps</li>
+</ul>
+Just by changing those two training hyperparameters, I was able to achieve ~42% accuracy for Part i, ~80% accuracy for Part ii, and ~92% accuracy for Part iii. This shows the importance of training for deep learning models: same architecture can have vastly different results.
+Note that there will be some randomness as you repeat the training (train/test split is random), so a small amount of increase or decrease (e.g., 1%) may be from this randomness. I suggest running it a few times to see if you get consistent improvements.
+Of course, there are other training options. Feel free to explore around. May be, see if you can beat my results.
+
+<br><br><br>
+<b>Submission:</b>
+<ul>
+<li><font face="courier new">part_i.m</font></li>
+<li><font face="courier new">part_ii.m</font></li>
+<li><font face="courier new">part_iii.m</font></li>
+<li><font face="courier new">answers.txt</font></li>
+</ul>
+<br>
+
+<b>Acknowledgement:</b> Adriana Kovashka.
+
+
+
+</body></html>

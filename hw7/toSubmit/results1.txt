@@ -1,0 +1,5 @@
+accuracy_pyramid = 0.5525
+accuracy_level0 = 0.4150
+accuracy_level1 = 0.5350
+
+The highest accuracy was the one utilizing the pyramid, or combinded version of level0 and level1. This is to be expected as it has the most "detail". Since level0 is the broadest, it makes sense that it is significantly less than either the pyramid accuracy or level1 accuracy. 

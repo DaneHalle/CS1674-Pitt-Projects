@@ -1,0 +1,13 @@
+accuracySVM = 0.5525
+accuracySVM_train = 0.6587
+
+accuracyKNN1 = 0.3950
+accuracyKNN1_train = 1
+
+accuracyKNN2 = 0.4225
+accuracyKNN2_train = 0.6850
+
+accuracyKNN21 = 0.4500
+accuracyKNN21_train = 0.5212
+
+This data aligns with what I expected compared to the SVM data looked at previously. I do find it interesting how the two largest accuracies seen are from KNN, which is generally less accurate, on the training data with k=1 having a 100% accuracy and k=2 having a 69% accuracy. However, that is likely due to some overfitting and we can see the classifier recover from that as k gets larger when k=21. Where the test classifier is still increasing in accuracy as k increases, the training classifier is becoming worse and would likely continue to become worse until the two classifiers converge somewhere around 48%. 
